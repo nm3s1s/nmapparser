@@ -1,5 +1,3 @@
-
-
 # 🔍 Nmap Output Parser
 
 <div align="center">
@@ -70,6 +68,8 @@ sudo cp nmap_parser.py /usr/local/bin/nmap-parser
 sudo chmod +x /usr/local/bin/nmap-parser
 nmap-parser scan.txt
 ```
+
+> **Nota:** Este script no requiere dependencias externas. No es necesario instalar colorama ni ningún paquete adicional.
 
 ## 📖 Uso
 
@@ -299,3 +299,4 @@ Este proyecto está bajo la licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 Made with ❤️ by [nm3s1s](https://github.com/nm3s1s)
 
 </div>
+

@@ -140,7 +140,7 @@ python3 nmap_parser.py scan_completo.nmap
 ```
 ╔═══════════════════════════════════════════════════════════╗
 ║           NMAP OUTPUT PARSER & ANALYZER v1.0              ║
-║                  By: Tomás (@nm3s1s)                      ║
+║                  By: @nm3s1s                              ║
 ╚═══════════════════════════════════════════════════════════╝
 
 [+] HOSTS ESCANEADOS

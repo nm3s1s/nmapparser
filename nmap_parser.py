@@ -58,16 +58,20 @@ class NmapParser:
 
     def extract_ports(self):
         self.ports_info = defaultdict(list)
-        # TXT
-        port_regex = re.compile(r'^(\d+)/([a-z]+)\s+open\s+([\w\-]+)\s*(.*)$', re.MULTILINE)
-        for match in port_regex.finditer(self.content):
-            port, proto, service, version = match.groups()
-            self.ports_info[proto].append({
-                'port': port,
-                'protocol': proto,
-                'service': service,
-                'version': version.strip() or "N/A"
-            })
+        # TXT: solo procesar líneas que sean puertos abiertos
+        port_lines = [line for line in self.content.splitlines() if re.match(r'^\d+/(tcp|udp)\s+open\s+[\w\-]+', line)]
+        port_regex = re.compile(r'^(\d+)/(tcp|udp)\s+open\s+([\w\-]+)(?:\s+(.*))?$', re.MULTILINE)
+        for line in port_lines:
+            match = port_regex.match(line)
+            if match:
+                port, proto, service, version = match.groups()
+                version = version.strip() if version else "N/A"
+                self.ports_info[proto].append({
+                    'port': port,
+                    'protocol': proto,
+                    'service': service,
+                    'version': version
+                })
         # XML
         if '<host>' in self.content:
             xml_ports = re.findall(r'<port protocol="([^"]+)" portid="(\d+)">.*?<state state="open".*?<service name="([^"]+)"( version="([^"]+)")?', self.content, re.DOTALL)
